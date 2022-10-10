@@ -1,6 +1,6 @@
 ## Auto Cursor
 
-```yaml
+```fish
 Description:
   Moves the cursor to the specified screen coordinates. Controls various aspects of mouse motion and button clicking.
 
