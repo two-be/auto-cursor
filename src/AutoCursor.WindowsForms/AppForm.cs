@@ -1,4 +1,4 @@
-using AutoCursor.Library;
+﻿using AutoCursor.Library;
 using AutoCursor.WindowsForms.Extensions;
 using System.Diagnostics;
 
@@ -7,6 +7,8 @@ namespace AutoCursor.WindowsForms
     public partial class AppForm : Form
     {
         private readonly WindowsCursor _cursor;
+        private readonly WindowsLastInput _lastInput;
+        private readonly MorningGreetings _morning;
 
         private int _interval = 300;
         private int _tick = 0;
@@ -15,6 +17,10 @@ namespace AutoCursor.WindowsForms
         {
             InitializeComponent();
             _cursor = new WindowsCursor();
+            _lastInput = new WindowsLastInput();
+
+            _morning = new MorningGreetings();
+            MessageBox.Show(_morning.GetRandomGreeting(), "👻❤️🐒", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void Error(Exception ex)
@@ -25,6 +31,7 @@ namespace AutoCursor.WindowsForms
         private void SetProcessing(bool start)
         {
             _interval = Convert.ToInt32(intervalNumericUpDown.Value);
+            _lastInput.SetIdleThreshold(Convert.ToUInt32(_interval / 10));
             toolStripProgressBar.Maximum = _interval;
 
             stopButton.Enabled = start;
@@ -101,6 +108,10 @@ namespace AutoCursor.WindowsForms
             if (_tick == intervalNumericUpDown.Value)
             {
                 _tick = 0;
+                if(!_lastInput.IsIdle())
+                {
+                    return;
+                }
                 _cursor.Click(Convert.ToInt32(xNumericUpDown.Value), Convert.ToInt32(yNumericUpDown.Value));
             }
             else
