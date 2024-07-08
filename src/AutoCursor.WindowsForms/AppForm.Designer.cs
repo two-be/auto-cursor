@@ -165,7 +165,7 @@
             intervalNumericUpDown.Size = new Size(160, 23);
             intervalNumericUpDown.TabIndex = 4;
             intervalNumericUpDown.ThousandsSeparator = true;
-            intervalNumericUpDown.Value = new decimal(new int[] { 300, 0, 0, 0 });
+            intervalNumericUpDown.Value = new decimal(new int[] { 120, 0, 0, 0 });
             // 
             // xLabel
             // 
@@ -248,8 +248,10 @@
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "AppForm";
-            Text = "Auto Cursor";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Something Cursor";
             FormClosing += AppForm_FormClosing;
+            Shown += AppForm_Shown;
             contextMenuStrip.ResumeLayout(false);
             menuStrip.ResumeLayout(false);
             menuStrip.PerformLayout();

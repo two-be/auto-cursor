@@ -10,7 +10,7 @@ namespace AutoCursor.WindowsForms
         private readonly WindowsLastInput _lastInput;
         private readonly MorningGreetings _morning;
 
-        private int _interval = 300;
+        private int _interval = 122;
         private int _tick = 0;
 
         public AppForm()
@@ -18,9 +18,7 @@ namespace AutoCursor.WindowsForms
             InitializeComponent();
             _cursor = new WindowsCursor();
             _lastInput = new WindowsLastInput();
-
             _morning = new MorningGreetings();
-            MessageBox.Show(_morning.GetRandomGreeting(), "👻❤️🐒", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void Error(Exception ex)
@@ -28,10 +26,16 @@ namespace AutoCursor.WindowsForms
             MessageBox.Show(ex.GetMessage(), Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
+        private void Minimize()
+        {
+            WindowState = FormWindowState.Minimized;
+            ShowInTaskbar = false;
+        }
+
         private void SetProcessing(bool start)
         {
             _interval = Convert.ToInt32(intervalNumericUpDown.Value);
-            _lastInput.SetIdleThreshold(Convert.ToUInt32(_interval / 10));
+            _lastInput.SetIdleThreshold(Convert.ToUInt32(_interval));
             toolStripProgressBar.Maximum = _interval;
 
             stopButton.Enabled = start;
@@ -78,8 +82,16 @@ namespace AutoCursor.WindowsForms
         private void AppForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             e.Cancel = true;
-            WindowState = FormWindowState.Minimized;
-            ShowInTaskbar = false;
+            Minimize();
+        }
+
+        private void AppForm_Shown(object sender, EventArgs e)
+        {
+            Start();
+
+            MessageBox.Show(_morning.GetRandomGreeting(), "👻❤️🐒", MessageBoxButtons.OK, MessageBoxIcon.None);
+
+            Minimize();
         }
 
         private void exitToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -105,10 +117,10 @@ namespace AutoCursor.WindowsForms
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            if (_tick == intervalNumericUpDown.Value)
+            if (_tick == _interval)
             {
                 _tick = 0;
-                if(!_lastInput.IsIdle())
+                if (!_lastInput.IsIdle())
                 {
                     return;
                 }
