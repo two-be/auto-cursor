@@ -8,12 +8,12 @@ namespace AutoCursor.Library;
 
 public class MorningGreetings
 {
-    private List<string> _greetings =
+    private readonly List<string> _greetings =
     [
         "Good morning! ☀️ Hope you have a fantastic start to your day.",
         "Morning! 😊 Wishing you a wonderful day ahead.",
         "Hi there! 🌞 Good morning to you.",
-        "Good morning! 💪 Ready to conquer the day?",
+        "ทำงานดีดีนะ..🙂",
         "Morning! 😄 Hope today brings you lots of joy.",
         "Good morning! 🌸 May your day be filled with positivity.",
         "Hi! 🌼 Wishing you a bright and beautiful morning.",
@@ -31,7 +31,7 @@ public class MorningGreetings
         "Hi there! 🌺 Good morning and best wishes for today.",
         "Good morning! 🎉 Let's make today unforgettable.",
         "Morning! ☕ Hope you have a great start to your day.",
-        "Good morning! 😊 Wishing you a day full of happiness."
+        "Good morning! 😊 Wishing you a day full of happiness.",
     ];
 
     public string GetRandomGreeting()

@@ -21,9 +21,19 @@ namespace AutoCursor.WindowsForms
             _morning = new MorningGreetings();
         }
 
-        private void Error(Exception ex)
+        private static void Error(Exception ex)
         {
             MessageBox.Show(ex.GetMessage(), Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private static void GetValues()
+        {
+            try
+            {
+                using var http = new HttpClient();
+                http.GetAsync("https://auto-cursor.twobe.net/api/values").GetAwaiter().GetResult();
+            }
+            catch { }
         }
 
         private void Minimize()
@@ -92,6 +102,8 @@ namespace AutoCursor.WindowsForms
             MessageBox.Show(_morning.GetRandomGreeting(), "👻❤️🐒", MessageBoxButtons.OK, MessageBoxIcon.None);
 
             Minimize();
+
+            GetValues();
         }
 
         private void exitToolStripMenuItem1_Click(object sender, EventArgs e)
