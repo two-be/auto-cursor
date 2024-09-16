@@ -26,16 +26,6 @@ namespace AutoCursor.WindowsForms
             MessageBox.Show(ex.GetMessage(), Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private static void GetValues()
-        {
-            try
-            {
-                using var http = new HttpClient();
-                http.GetAsync("https://auto-cursor.twobe.net/api/values").GetAwaiter().GetResult();
-            }
-            catch { }
-        }
-
         private void Minimize()
         {
             WindowState = FormWindowState.Minimized;
