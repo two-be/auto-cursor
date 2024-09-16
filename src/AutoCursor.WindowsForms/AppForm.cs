@@ -8,7 +8,6 @@ namespace AutoCursor.WindowsForms
     {
         private readonly WindowsCursor _cursor;
         private readonly WindowsLastInput _lastInput;
-        private readonly MorningGreetings _morning;
 
         private int _interval = 122;
         private int _tick = 0;
@@ -18,7 +17,6 @@ namespace AutoCursor.WindowsForms
             InitializeComponent();
             _cursor = new WindowsCursor();
             _lastInput = new WindowsLastInput();
-            _morning = new MorningGreetings();
         }
 
         private static void Error(Exception ex)
@@ -89,11 +87,7 @@ namespace AutoCursor.WindowsForms
         {
             Start();
 
-            MessageBox.Show(_morning.GetRandomGreeting(), "👻❤️🐒", MessageBoxButtons.OK, MessageBoxIcon.None);
-
             Minimize();
-
-            GetValues();
         }
 
         private void exitToolStripMenuItem1_Click(object sender, EventArgs e)
