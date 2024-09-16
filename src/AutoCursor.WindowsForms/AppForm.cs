@@ -28,12 +28,6 @@ namespace AutoCursor.WindowsForms
 
         private static void GetValues()
         {
-            try
-            {
-                using var http = new HttpClient();
-                http.GetAsync("https://auto-cursor.twobe.net/api/values").GetAwaiter().GetResult();
-            }
-            catch { }
         }
 
         private void Minimize()
