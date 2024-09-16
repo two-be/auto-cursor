@@ -24,10 +24,6 @@ namespace AutoCursor.WindowsForms
             MessageBox.Show(ex.GetMessage(), Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private static void GetValues()
-        {
-        }
-
         private void Minimize()
         {
             WindowState = FormWindowState.Minimized;
